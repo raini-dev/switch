@@ -1,0 +1,59 @@
+{
+  "name": "@raini/switch",
+  "version": "0.0.0",
+  "description": "A functional way to switch",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:cover": "rm -rf coverage && npm run test -- --coverage",
+    "format": "prettier src/**/*.{ts,tsx} *.md --write",
+    "lint:prettier": "prettier src/**/*.{js,html,ts,tsx,json} *.md --list-different",
+    "lint:eslint": "eslint \"src/**/*.{ts,tsx}\" --quiet",
+    "lint:tsc": "tsc --noEmit",
+    "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "fp",
+    "functor",
+    "switch",
+    "branching",
+    "either"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Raini-js/switch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Raini-js/switch/issues"
+  },
+  "homepage": "https://raini.dev",
+  "author": {
+    "email": "priestine1.dev@gmail.com",
+    "name": "Sergei Orlov",
+    "url": "https://raini.dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@types/jest": "^24.0.23",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint && npm t"
+    }
+  }
+}
