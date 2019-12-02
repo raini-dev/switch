@@ -11,7 +11,7 @@ stages:
   - name: cover
     if: branch = master AND type = push
   - name: versioning
-    if: branch = master AND type = push
+    if: branch = master AND type != push
   - name: publish
     if: tag IS present AND tag =~ ^v AND type != push
 
