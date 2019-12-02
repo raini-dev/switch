@@ -6,3 +6,6 @@ dist/
 coverage/
 .env
 tsconfig.tsbuildinfo
+*.d.ts
+*.map
+*.js
