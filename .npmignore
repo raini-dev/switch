@@ -13,3 +13,4 @@ tests
 tsconfig.json
 jest.config.js
 *.sh
+tsconfig.tsbuildinfo
