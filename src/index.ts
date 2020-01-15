@@ -2,7 +2,7 @@ import { Switch } from "./Switch";
 
 export * from "./ISwitch";
 export * from "./Switch";
-export * from "./TKnown";
+export * from "./Unpack";
 export * from "./TPredicateFunction";
 
 /**
