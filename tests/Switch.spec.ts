@@ -1,5 +1,4 @@
-import { Switch } from "../src";
-import match from "../src";
+import match, { Switch } from "../src";
 
 describe("Switch", () => {
   it("should exist", () => {
