@@ -20,7 +20,7 @@ class SwitchMatched<T, K> implements ISwitch<T, K> {
 }
 
 /**
- * Switch resembles imperative switch statement using functions.
+ * Switch resembles imperative switch statement using chaining.
  *
  * Internally, Switch behaves like Either in the sense that it preserves the position of Right
  * until it successfully matches case predicate (either function or value). If matching happens,
