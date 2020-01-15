@@ -9,3 +9,4 @@ tsconfig.tsbuildinfo
 *.d.ts
 *.map
 *.js
+!jest.config.js
