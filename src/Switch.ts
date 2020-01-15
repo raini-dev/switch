@@ -26,12 +26,12 @@ class SwitchMatched<T, K> implements ISwitch<T, K> {
  * Switch becomes a kind of Left and holds the value until it reaches the .default call. If
  * matching didn't happen for all cases, the value of the .default argument is returned instead.
  */
-export class Switch<T, K extends []> implements ISwitch<T, K> {
+export class Switch<T, K extends any[]> implements ISwitch<T, K> {
   /**
    * Pointer interface for lifting a value into Switch.
    */
-  public static for<T, K extends [] = []>(x: T): ISwitch<T, K> {
-    return new Switch<T, K>(x);
+  public static for<T, K = []>(x: T): ISwitch<T, K extends [] ? K : [K]> {
+    return new Switch<T, K extends [] ? K : [K]>(x);
   }
 
   /**
