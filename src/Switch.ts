@@ -1,7 +1,6 @@
 import { TNonFunction, TPredicateFunction } from "./TPredicateFunction";
 import { ISwitch } from "./ISwitch";
-
-export type Unpack<T> = T extends (infer U)[] ? U : T;
+import { Unpack } from "./Unpack";
 
 class SwitchMatched<T, K> implements ISwitch<T, K> {
   public static for<T>(x: T): any {

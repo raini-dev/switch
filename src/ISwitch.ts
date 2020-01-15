@@ -1,12 +1,5 @@
 import { TNonFunction, TPredicateFunction } from "./TPredicateFunction";
-import { TKnown } from "./TKnown";
-import { Unpack } from "./Switch";
-
-/**
- * ISwitch for cases when K is defined.
- * @type TDefinedSwitch
- */
-export type TDefinedSwitch<T, K, N> = ISwitch<T, TKnown<K, N>>;
+import { Unpack } from "./Unpack";
 
 /**
  * @interface ISwitch
