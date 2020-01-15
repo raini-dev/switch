@@ -62,11 +62,11 @@ const isChrome = (x: Navigator): boolean => "vendor" in x && /Google Inc/.test(x
 const isIe = (x: Navigator): boolean => /Trident/.test(x.userAgent);
 
 export const getCurrentBrowser = (navigator: Navigator): TBrowser =>
-  Switch<Navigator, TBrowser>(navigator)
-    .case(isEdge, "edge")
-    .case(isChrome, "chrome")
-    .case(isIe, "ie")
-    .default("firefox");
+  Switch(navigator)
+    .case(isEdge, "edge" as const)
+    .case(isChrome, "chrome" as const)
+    .case(isIe, "ie" as const)
+    .default("firefox" as const);
 
 const browser = getCurrentBrowser(navigator);
 ```

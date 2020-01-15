@@ -1,7 +1,6 @@
 import { TNonFunction, TPredicateFunction } from "./TPredicateFunction";
 import { ISwitch } from "./ISwitch";
-
-export type Unpack<T> = T extends (infer U)[] ? U : T;
+import { Unpack } from "./Unpack";
 
 class SwitchMatched<T, K> implements ISwitch<T, K> {
   public static for<T>(x: T): any {
@@ -20,18 +19,18 @@ class SwitchMatched<T, K> implements ISwitch<T, K> {
 }
 
 /**
- * Switch resembles imperative switch statement using functions.
+ * Switch resembles imperative switch statement using chaining.
  *
  * Internally, Switch behaves like Either in the sense that it preserves the position of Right
  * until it successfully matches case predicate (either function or value). If matching happens,
  * Switch becomes a kind of Left and holds the value until it reaches the .default call. If
  * matching didn't happen for all cases, the value of the .default argument is returned instead.
  */
-export class Switch<T, K extends any[]> implements ISwitch<T, K> {
+export class Switch<T, K extends []> implements ISwitch<T, K> {
   /**
    * Pointer interface for lifting a value into Switch.
    */
-  public static for<T, K extends any[] = []>(x: T): ISwitch<T, K> {
+  public static for<T, K extends [] = []>(x: T): ISwitch<T, K> {
     return new Switch<T, K>(x);
   }
 
@@ -49,11 +48,11 @@ export class Switch<T, K extends any[]> implements ISwitch<T, K> {
    * Define predicate function to be executed against Switch state and the value to be
    * returned in case of matching.
    */
-  public case<N>(pred: TPredicateFunction<T>, res: N): ISwitch<T, [Unpack<K>, N]>;
-  public case<N>(pred: any, res: N): ISwitch<T, [Unpack<K>, N]> {
+  public case<N>(pred: TPredicateFunction<T>, value: N): ISwitch<T, [Unpack<K>, N]>;
+  public case<N>(pred: any, value: N): ISwitch<T, [Unpack<K>, N]> {
     const check = typeof pred == "function" ? pred(this.x) : pred === this.x;
 
-    return check ? SwitchMatched.for(res) : Switch.for(this.x);
+    return check ? SwitchMatched.for(value) : Switch.for(this.x);
   }
 
   /**
