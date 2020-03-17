@@ -1,3 +1,4 @@
+/* eslint-disable */
 import match, { Switch } from "../src";
 
 describe("Switch", () => {
@@ -21,7 +22,7 @@ describe("Switch", () => {
         match("")
           .case("", 123)
           .default(345),
-      ).toEqual(123);
+      ).toEqual(Switch.for(123));
     });
 
     it("should return value if matched by predicate function", () => {
@@ -29,7 +30,7 @@ describe("Switch", () => {
         match("asdf")
           .case(x => x == "asdf", 123)
           .default(345),
-      ).toEqual(123);
+      ).toEqual(Switch.for(123));
     });
 
     it("should return default value if not matched", () => {
@@ -37,7 +38,7 @@ describe("Switch", () => {
         match("asdf")
           .case("", 123)
           .default(234),
-      ).toEqual(234);
+      ).toEqual(Switch.for(234));
     });
 
     it("should preserve the first match and its value", () => {
@@ -46,7 +47,7 @@ describe("Switch", () => {
           .case("asdf", 123)
           .case("asdf", 234)
           .default(345),
-      ).toEqual(123);
+      ).toEqual(Switch.for(123));
     });
   });
 });
