@@ -14,7 +14,21 @@ class SwitchMatched<T, K> implements ISwitch<T, K> {
   }
 
   public default(): any {
-    return this.x;
+    return this.case();
+  }
+
+  public fold<N>(f: (x: T) => N): N {
+    return f(this.x);
+  }
+
+  public map<N>(f: (x: T) => N): ISwitch<N, Unpack<K>> {
+    return SwitchMatched.for(f(this.x));
+  }
+
+  public ap<N extends (x: T) => any>(
+    o: ISwitch<N, []>,
+  ): ISwitch<N extends (x: T) => infer R ? R : never, Unpack<K>> {
+    return SwitchMatched.for(this.fold(o.fold(x => x)));
   }
 }
 
@@ -58,7 +72,21 @@ export class Switch<T, K extends any[]> implements ISwitch<T, K> {
   /**
    * Define the value to be returned in case none of the cases was matched.
    */
-  public default<V>(defaultValue: V): Unpack<K> | V {
-    return defaultValue;
+  public default<V>(defaultValue: V): ISwitch<V, Unpack<K>> {
+    return Switch.for(defaultValue);
+  }
+
+  public fold<N>(f: (x: T) => N): N {
+    return f(this.x);
+  }
+
+  public map<N>(f: (x: T) => N): ISwitch<N, Unpack<K>> {
+    return (Switch.for(f(this.x)) as unknown) as ISwitch<N, Unpack<K>>;
+  }
+
+  public ap<N extends (x: T) => any>(
+    o: ISwitch<N, []>,
+  ): ISwitch<N extends (x: T) => infer R ? R : never, Unpack<K>> {
+    return Switch.for(this.fold(o.fold(x => x)));
   }
 }
