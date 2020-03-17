@@ -1,18 +1,14 @@
-import DefaultSwitch from "./DefaultSwitch";
-
 export * from "./ISwitch";
 export * from "./Switch";
 export * from "./Unpack";
 export * from "./TPredicateFunction";
-export * from "./DefaultSwitch";
 
+import { ISwitch } from "./ISwitch";
+import { Switch as SwitchClass } from "./Switch";
 
-
-const a = DefaultSwitch('a')
-.case('b', false)
-.case('c', false)
-.case('d', false)
-.case('a', true)
-.default(false);
-
-console.log(a);
+/**
+ * Pointer interface for lifting value provided as an argument to Switch.
+ */
+export default function Switch<T, K = []>(x: T): ISwitch<T, K extends [] ? K : [K]> {
+  return SwitchClass.for<T, K>(x);
+}
