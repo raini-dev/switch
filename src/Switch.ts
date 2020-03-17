@@ -3,7 +3,14 @@ import { ISwitch } from "./ISwitch";
 import { Unpack } from "./Unpack";
 
 class SwitchMatched<T, K> implements ISwitch<T, K> {
+  /**
+   * @deprecated
+   */
   public static for<T>(x: T): any {
+    return new SwitchMatched(x);
+  }
+
+  public static of<T>(x: T): any {
     return new SwitchMatched(x);
   }
 
@@ -43,8 +50,13 @@ class SwitchMatched<T, K> implements ISwitch<T, K> {
 export class Switch<T, K extends any[]> implements ISwitch<T, K> {
   /**
    * Pointer interface for lifting a value into Switch.
+   * @deprecated
    */
   public static for<T, K = []>(x: T): ISwitch<T, K extends [] ? K : [K]> {
+    return new Switch<T, K extends [] ? K : [K]>(x);
+  }
+
+  public static of<T, K = []>(x: T): ISwitch<T, K extends [] ? K : [K]> {
     return new Switch<T, K extends [] ? K : [K]>(x);
   }
 
