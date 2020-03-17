@@ -2,7 +2,7 @@ import { TNonFunction, TPredicateFunction } from "./TPredicateFunction";
 import { ISwitch } from "./ISwitch";
 import { Unpack } from "./Unpack";
 
-class SwitchMatched<T, K> implements ISwitch<T, K> {
+export class SwitchMatched<T, K> implements ISwitch<T, K> {
   /**
    * @deprecated
    */
