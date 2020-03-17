@@ -9,9 +9,9 @@ cache:
 stages:
   - check
   - name: cover
-    if: branch = master AND type = push
+    if: branch = master
   - name: versioning
-    if: branch = master AND type = push
+    if: branch = master
   - name: publish
     if: tag IS present AND tag =~ ^v
 
@@ -27,8 +27,7 @@ jobs:
         - bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -f coverage/*.json
     - stage: versioning
       script:
-        - npm install -g @priestine/semantics
-        - priestine-semantics --private-token=${SEMANTICS_TOKEN} --project-path=Raini-js/switch --prefix=v
+        - npx @priestine/semantics --prefix=v --user=priestine --password=${SEMANTICS_TOKEN}
     - stage: publish
       script:
         - bash deploy_npm.sh
